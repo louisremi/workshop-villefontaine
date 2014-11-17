@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('fontxplor')
-	.controller('MainCtrl', function ($scope, allfonts, $routeParams) {
-
+	.controller('MainCtrl', function ($scope, allfonts, $stateParams) {
+console.log('here');
 		$scope.allfonts = {};
 		// convert the font array to a font map
 		allfonts.forEach(function( font ) {
@@ -10,7 +10,7 @@ angular.module('fontxplor')
 		});
 
 		// reference to the current font, according to the url
-		$scope.currentFont = $routeParams.fontName !== '_' && $scope.allfonts[ $routeParams.fontName ];
+		$scope.currentFont = $stateParams.fontName !== '_' && $scope.allfonts[ $stateParams.fontName ];
 
 		// build a style object to apply the font-family using ng-style
 		$scope.getFontFamily = function( font ) {
