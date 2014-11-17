@@ -1,0 +1,17 @@
+{
+  "name": "fontxplor",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "2.8.x",
+    "angular": "1.3.x",
+    "jquery": "2.x.x",
+    "angular-animate": "1.3.x",
+    "angular-resource": "1.3.x",
+    "angular-route": "1.3.x",
+    "swfobject": "^2.3.0",
+    "font-detect-js": "git@github.com:louisremi/font-detect-js.git"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.3.x"
+  }
+}
