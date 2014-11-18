@@ -1,0 +1,18 @@
+<div ng-if="currentFont" ng-style="getFontFamily( currentFont )">
+	<input class="row" ng-model="variantsString" spellcheck="false"/>
+
+	<ul class="unstyled">
+		<li>
+			{{ variantsString }}
+		</li>
+		<li style="font-weight: bold;">
+			{{ variantsString }}
+		</li>
+		<li style="font-style: italic;">
+			{{ variantsString }}
+		</li>
+		<li style="font-style: italic; font-weight: bold;">
+			{{ variantsString }}
+		</li>
+	</ul>
+</div>

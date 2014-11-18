@@ -1,20 +1,32 @@
 'use strict';
 
 angular.module('fontxplor')
-	.controller('MainCtrl', function ($scope, allfonts, $stateParams) {
-console.log('here');
-		$scope.allfonts = {};
+	.controller('MainCtrl', function ($scope, localfonts, googlefonts, $routeParams) {
+
+		console.log(localfonts);
+		console.log(googlefonts);
+		console.log($routeParams);
+
+		$scope.variantsString = 'Portez ce vieux whisky au juge blond qui fume';
+
+
+		$scope.localfonts = {};
 		// convert the font array to a font map
-		allfonts.forEach(function( font ) {
-			$scope.allfonts[font.fontName] = font;
+		localfonts.forEach(function( font ) {
+			$scope.localfonts[font.fontName] = font;
 		});
 
 		// reference to the current font, according to the url
-		$scope.currentFont = $stateParams.fontName !== '_' && $scope.allfonts[ $stateParams.fontName ];
+		$scope.currentFont = $routeParams.fontName !== '_' && $scope.localfonts[ $routeParams.fontName ];
+		$scope.mode = $routeParams.mode;
 
 		// build a style object to apply the font-family using ng-style
 		$scope.getFontFamily = function( font ) {
 			return { 'font-family': '"' + font.fontName + '"' };
+		};
+
+		$scope.getTemplateURL = function( mode ) {
+			return mode !== '_' && 'partials/' + mode + '.html';
 		};
 
 	});

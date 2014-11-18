@@ -1,12 +1,12 @@
 <header id="header" role="banner" class="line pam">
-	<h1>Font XPlor</h1>
+	<h1>FontLib</h1>
 </header>
 
-<aside class="mod left w20 mrs pam aside">
+<aside class="mod left w33 mrs pam aside">
 	<nav id="navigation" role="navigation">
 		<ul class="pa0 unstyled">
-			<li class="pas" ng-repeat="font in allfonts" ng-style="getFontFamily( font )">
-				<a ng-href="#/{{ font.fontName }}">
+			<li class="pas" ng-repeat="font in localfonts" ng-style="getFontFamily( font )">
+				<a ng-href="#/{{ mode }}/{{ font.fontName }}">
 					{{ font.fontName }}
 				</a>
 			</li>
@@ -14,8 +14,23 @@
 	</nav>
 </aside>
 
-<div id="main" role="main" class="mod pam" ui-view>
-	Hola!
+<div id="main" role="main" class="mod pam">
+	<nav id="tab-switch" role="navigation">
+		<ul class="pa0 unstyled">
+			<li class="pas inbl">
+				<a ng-href="#/lipsum/{{ currentFont.fontName }}">
+					Lipsum {{ currentFont.fontName }}
+				</a>
+			</li>
+			<li class="pas inbl">
+				<a ng-href="#/variants/{{ currentFont.fontName }}">
+					Variants {{ currentFont.fontName }}
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<div ng-include="getTemplateURL( mode )"></div>
 </div>
 
 <footer id="footer" role="contentinfo" class="line pam txtcenter">
