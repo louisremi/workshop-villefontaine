@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('fontxplor', ['ngAnimate', 'ngResource', 'ngRoute'])
-	.config(function ($routeProvider) {
+angular.module('fontxplor', ['ngAnimate', 'ngResource', 'ui.router'])
+	.config(function ($stateProvider, $urlRouterProvider) {
 		var _localfonts,
 			_googlefonts;
 
@@ -20,8 +20,11 @@ angular.module('fontxplor', ['ngAnimate', 'ngResource', 'ngRoute'])
 				});
 		}
 
-		$routeProvider
-			.when('/:mode/:fontName', {
+		$urlRouterProvider.otherwise('/');
+
+		$stateProvider
+			.state('home', {
+				url: '/',
 				templateUrl: 'app/main/main.html',
 				controller: 'MainCtrl',
 				resolve: {
@@ -29,10 +32,16 @@ angular.module('fontxplor', ['ngAnimate', 'ngResource', 'ngRoute'])
 					googlefonts: googlefonts
 				}
 			})
-			.when('/', {
-				redirectTo: '/lipsum/_'
-			})
-			.otherwise({
-				redirectTo: '/lipsum/_'
+			.state('home.preview', {
+				url: '{mode}/{fontName}',
+				templateUrl: function( $stateParams ) {
+					return 'partials/' + $stateParams.mode + '.html';
+				},
+				controller: 'MainCtrl'
 			});
+
+	})
+	.run(function ($rootScope, $state, $stateParams) {
+		$rootScope.$state = $state;
+		$rootScope.$stateParams = $stateParams;
 	});

@@ -1,11 +1,7 @@
 'use strict';
 
 angular.module('fontxplor')
-	.controller('MainCtrl', function ($scope, localfonts, googlefonts, $routeParams) {
-
-		console.log(localfonts);
-		console.log(googlefonts);
-		console.log($routeParams);
+	.controller('MainCtrl', function ($scope, localfonts, googlefonts, $stateParams) {
 
 		$scope.variantsString = 'Portez ce vieux whisky au juge blond qui fume';
 
@@ -17,8 +13,8 @@ angular.module('fontxplor')
 		});
 
 		// reference to the current font, according to the url
-		$scope.currentFont = $routeParams.fontName !== '_' && $scope.localfonts[ $routeParams.fontName ];
-		$scope.mode = $routeParams.mode;
+		$scope.currentFont = $stateParams.fontName !== '_' && $scope.localfonts[ $stateParams.fontName ];
+		$scope.mode = $stateParams.mode;
 
 		// build a style object to apply the font-family using ng-style
 		$scope.getFontFamily = function( font ) {

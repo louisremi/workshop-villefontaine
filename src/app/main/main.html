@@ -6,7 +6,7 @@
 	<nav id="navigation" role="navigation">
 		<ul class="pa0 unstyled">
 			<li class="pas" ng-repeat="font in localfonts" ng-style="getFontFamily( font )">
-				<a ng-href="#/{{ mode }}/{{ font.fontName }}">
+				<a ui-sref="home.preview({ mode: $stateParams.mode || 'lipsum', fontName: font.fontName })">
 					{{ font.fontName }}
 				</a>
 			</li>
@@ -18,19 +18,19 @@
 	<nav id="tab-switch" role="navigation">
 		<ul class="pa0 unstyled">
 			<li class="pas inbl">
-				<a ng-href="#/lipsum/{{ currentFont.fontName }}">
-					Lipsum {{ currentFont.fontName }}
+				<a ui-sref="home.preview({ mode: 'lipsum', fontName: $stateParams.fontName })">
+					Lipsum
 				</a>
 			</li>
 			<li class="pas inbl">
-				<a ng-href="#/variants/{{ currentFont.fontName }}">
-					Variants {{ currentFont.fontName }}
+				<a ui-sref="home.preview({ mode: 'variants', fontName: $stateParams.fontName })">
+					Variants
 				</a>
 			</li>
 		</ul>
 	</nav>
 
-	<div ng-include="getTemplateURL( mode )"></div>
+	<div ui-view></div>
 </div>
 
 <footer id="footer" role="contentinfo" class="line pam txtcenter">
