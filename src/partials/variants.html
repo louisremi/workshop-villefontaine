@@ -1,4 +1,4 @@
-<div ng-if="currentFont" ng-style="getFontFamily( currentFont )">
+<div ng-if="$stateParams.family" ng-style="getFontFamily( $stateParams.family )">
 	<input class="row" ng-model="variantsString" spellcheck="false"/>
 
 	<ul class="unstyled">

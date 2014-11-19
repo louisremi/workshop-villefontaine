@@ -4,10 +4,11 @@
 
 <aside class="mod left w33 mrs pam aside">
 	<nav id="navigation" role="navigation">
+		Search by family: <input type="text" ng-model="search.family" />
 		<ul class="pa0 unstyled">
-			<li class="pas" ng-repeat="font in localfonts" ng-style="getFontFamily( font )">
-				<a ui-sref="home.preview({ mode: $stateParams.mode || 'lipsum', fontName: font.fontName })">
-					{{ font.fontName }}
+			<li class="pas" ng-repeat="font in googlefonts | filter:search.family" ng-style="getFontFamily( false )">
+				<a ui-sref="home.preview({ mode: $stateParams.mode || 'lipsum', family: font.family })">
+					{{ font.family }}
 				</a>
 			</li>
 		</ul>
@@ -18,19 +19,21 @@
 	<nav id="tab-switch" role="navigation">
 		<ul class="pa0 unstyled">
 			<li class="pas inbl">
-				<a ui-sref="home.preview({ mode: 'lipsum', fontName: $stateParams.fontName })">
+				<a ui-sref="home.preview({ mode: 'lipsum', family: $stateParams.family })">
 					Lipsum
 				</a>
 			</li>
 			<li class="pas inbl">
-				<a ui-sref="home.preview({ mode: 'variants', fontName: $stateParams.fontName })">
+				<a ui-sref="home.preview({ mode: 'variants', family: $stateParams.family })">
 					Variants
 				</a>
 			</li>
 		</ul>
 	</nav>
 
-	<div ui-view></div>
+	<link rel="stylesheet" ng-href="{{ getFontFace( $stateParams.family ) }}" />
+
+	<div class="preview" ui-view></div>
 </div>
 
 <footer id="footer" role="contentinfo" class="line pam txtcenter">

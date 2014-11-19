@@ -33,7 +33,7 @@ angular.module('fontxplor', ['ngAnimate', 'ngResource', 'ui.router'])
 				}
 			})
 			.state('home.preview', {
-				url: '{mode}/{fontName}',
+				url: '{mode}/{family}',
 				templateUrl: function( $stateParams ) {
 					return 'partials/' + $stateParams.mode + '.html';
 				},

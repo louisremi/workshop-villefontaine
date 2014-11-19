@@ -1,28 +1,37 @@
 'use strict';
 
 angular.module('fontxplor')
-	.controller('MainCtrl', function ($scope, localfonts, googlefonts, $stateParams) {
+	.controller('MainCtrl', function ( $rootScope, $scope, localfonts, googlefonts ) {
 
 		$scope.variantsString = 'Portez ce vieux whisky au juge blond qui fume';
 
-
-		$scope.localfonts = {};
+		$scope.localfonts = localfonts;
+		var localfontsMap = {};
 		// convert the font array to a font map
 		localfonts.forEach(function( font ) {
-			$scope.localfonts[font.fontName] = font;
+			font.family = font.family;
+			localfontsMap[font.family] = font;
 		});
 
-		// reference to the current font, according to the url
-		$scope.currentFont = $stateParams.fontName !== '_' && $scope.localfonts[ $stateParams.fontName ];
-		$scope.mode = $stateParams.mode;
+		$scope.googlefonts = googlefonts;
+		var googlefontsMap = {};
+		// convert the font array to a font map
+		googlefonts.forEach(function( font ) {
+			googlefontsMap[font.family] = font;
+		});
 
 		// build a style object to apply the font-family using ng-style
-		$scope.getFontFamily = function( font ) {
-			return { 'font-family': '"' + font.fontName + '"' };
+		$scope.getFontFamily = function( family ) {
+			return family && { 'font-family': '"' + family + '"' };
 		};
 
-		$scope.getTemplateURL = function( mode ) {
-			return mode !== '_' && 'partials/' + mode + '.html';
+		// build a stylesheet url for a particular font
+		$scope.getFontFace = function( family ) {
+			var font = googlefontsMap[ family ];
+
+			return 'http://fonts.googleapis.com/css?family=' +
+				family.replace(' ', '+') + ':' +
+				font.variants.join();
 		};
 
 	});
