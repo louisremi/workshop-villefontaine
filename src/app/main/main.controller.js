@@ -29,7 +29,7 @@ angular.module('fontxplor')
 		$scope.getFontFace = function( family ) {
 			var font = googlefontsMap[ family ];
 
-			return 'http://fonts.googleapis.com/css?family=' +
+			return family && 'http://fonts.googleapis.com/css?family=' +
 				family.replace(' ', '+') + ':' +
 				font.variants.join();
 		};
